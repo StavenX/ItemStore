@@ -79,6 +79,7 @@ public class PurchaseHandler
                 if (boughtItem == false)
                 {
                     System.out.println("Invalid item. Enter a valid item.");
+                    store.printItems();
                 }
                 break;
             

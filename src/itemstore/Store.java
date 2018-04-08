@@ -38,7 +38,8 @@ public class Store
         for (int i = 0; i < items.size(); i++)
         {
             System.out.println(
-                    makeUpperCase(items.get(i).name)
+                    " "
+                    + makeUpperCase(items.get(i).name)
                     + " - Price: "
                     + (items.get(i).getPrice())
             );
