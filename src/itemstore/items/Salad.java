@@ -13,11 +13,23 @@ public class Salad extends Item
 {
     public Salad(String _name, int _price)
     {
-        name = _name;
-        setPrice(_price);
+        super();
         
-        sounds.add("Scrumble mumble, salad ballad!");
-        sounds.add("At least they don't eat me in America..");
-        sounds.add("Don't grill me. I'll always be raw..");
+        name = _name;
+        super.setPrice(_price);
+        
+        //super.sounds.add("Scrumble mumble, salad ballad!");
+        //super.sounds.add("At least they don't eat me in America..");
+        //super.sounds.add("Don't grill me. I'll always be raw..");
+        
+        addSoundToList("Scrumble mumble, salad ballad!");
+        addSoundToList("At least they don't eat me in America..");
+        addSoundToList("Don't grill me. I'll always be raw..");
+    }
+    
+    @Override
+    public void makeSound() 
+    {
+        System.out.println(getRandomSound());
     }
 }

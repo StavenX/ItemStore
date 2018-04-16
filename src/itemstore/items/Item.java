@@ -12,7 +12,7 @@ import java.util.Random;
 public abstract class Item implements iItem
 {
     ArrayList<String> sounds = new ArrayList<String>();
-    private int price;
+    protected int price;
     public String name;  
 
     public int getPrice() {
@@ -27,8 +27,13 @@ public abstract class Item implements iItem
         return name;
     }
     
+    // Adds a 'sound' to the object's sound list
+    public void addSoundToList(String sound)
+    {
+        this.sounds.add(sound);
+    }
+    
     // Returns a random sound from the items 'sounds' list
-
     public String getRandomSound()
     {
         Random rand = new Random();
@@ -36,19 +41,23 @@ public abstract class Item implements iItem
         
         int rNumber = rand.nextInt(this.sounds.size());
         returnSound = this.sounds.get(rNumber);
-        
-        
+
         return returnSound;
     }
     
-    public void makeSound()
-    {
-        System.out.println(getRandomSound());
-        System.out.println(getSoundsSize());
-    }
-    
+    // Returns the list of the 'sounds' list
     public int getSoundsSize()
     {
         return this.sounds.size();
     }
+    
+    // Makes a sound from the item's list 'sounds', and
+    // 
+    public void makeSound()
+    {
+        System.out.println(getRandomSound());
+        System.out.println("Voicelines in list: " + getSoundsSize());
+    }
+    
+    
 }

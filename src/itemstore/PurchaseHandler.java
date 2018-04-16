@@ -23,7 +23,7 @@ public class PurchaseHandler
         return Character.toUpperCase(s.charAt(0)) + s.substring(1);
     }
     
-        // Reads the next input from the user
+    // Reads the next input from the user
     public static void getInput()
     {
         System.out.print("> ");
