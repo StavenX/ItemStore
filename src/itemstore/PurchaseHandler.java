@@ -1,37 +1,46 @@
 package itemstore;
-
-import static itemstore.Start.input;
-import static itemstore.Start.printItems;
-import static itemstore.Start.scanner;
-import static itemstore.Start.store;
+import static itemstore.ItemStore.input;
+import static itemstore.ItemStore.printItems;
+import static itemstore.ItemStore.scanner;
+import static itemstore.ItemStore.store;
 import java.util.ArrayList;
 
 /**
- * Input handler for user commands, and basically
- * everything being input into the program console.
- * 
+ * Input handler for user commands, (everything being input into the program console).
  * Currently written specifically for this ItemStore program.
  * 
+ * TODO: Implement a money-system when purchasing something
+ * 
  * @author Staven
+ * @version 1.3
+ * @since 30-05-2018
  */
 
 public class PurchaseHandler 
 {
-    // Makes input uppercase, f.eks 'string' -> 'String'
+    /**
+     * @param s The string to make upper-case
+     * @return The string from parameter to upper-case
+     */
     public static String makeUpperCase(String s)
     {
         return Character.toUpperCase(s.charAt(0)) + s.substring(1);
     }
     
-    // Reads the next input from the user
+    /**
+     * Gets input from the user. Will print a prompt
+     * at the start of a line
+     */
     public static void getInput()
     {
         System.out.print("> ");
         input = scanner.nextLine();
     }
     
-    // Main input-handler for all user-input. Every case (except default) is a
-    // command the user can use to interact with the system. 
+    /**
+     *  Function that handles all user-input. Every case (except default) is a
+     *  command the user can use to interact with the ItemStore
+     */
     public static void handleInput()
     {
         String[] arguments = input.toLowerCase().split(" ");
@@ -51,19 +60,21 @@ public class PurchaseHandler
                 break;
             case "buy" :
                 boolean boughtItem = false;
+                
                 // Iterates through the list of items in the store
                 for (int i = 0; i < store.items.size(); i++)
                 {
-                    // Checks if the array is actually bigger than 1 item.
-                    // If not, the user has just enteret 'buy' without
-                    // parameter, and the program will not buy anything.
+                    /* Checks if the array is actually bigger than 1 item.                   
+                     * If not, the user has just entered 'buy' without
+                     * parameter, and the program will not buy anything.
+                    */ 
                     if (arguments.length > 1)
                     {
-                        // If input is the same as an item from store
+                        // If the input corresponds to an item from the Store
                         if (arguments[1].equals(store.items.get(i).name))
                         {
-                            // Adds the item to 'purchasedItems'
-                            Start.purchasedItems.add(store.items.get(i));
+                            // Adds the item to 'purchasedItems' (success)
+                            ItemStore.purchasedItems.add(store.items.get(i));
                             System.out.println("- You bought 1 " 
                                 + makeUpperCase(store.items.get(i).name)
                                 + "."
@@ -75,7 +86,7 @@ public class PurchaseHandler
                         }
                     }
                 }
-                // If user did not buy an item through the 'buy' command
+                // If user entered an unrecognisable item with the 'buy' command
                 if (boughtItem == false)
                 {
                     System.out.println("Invalid item. Enter a valid item.");
@@ -89,13 +100,20 @@ public class PurchaseHandler
                 break;
         }
     }
-    // If user entered a command that does not exist
+    
+    /**
+     * Method for informing the user that they typed an invalid command, and
+     * provides a help-command
+     */
     public static void printInvalidCommand()
     {
         System.out.println("Invalid command. Type 'help' for available commands.");
     }
     
-    // Prints all available user-commands
+    /**
+     * Method that prints all available user-commands. Currently the commands are
+     * hard-coded into the function
+     */
     public static void printAvailableUserCommands()
     {
         ArrayList<String> commands = new ArrayList<String>();
@@ -105,8 +123,8 @@ public class PurchaseHandler
         commands.add("buy (item)");
         commands.add("help");
         
-        // Prints available user-commands buy iterating through 
-        // the list of commands in 'commands'
+        // Iterates  through the list 'commands'
+        // and prints entriesas a valid command
         System.out.println("Available commands: ");
         for (int i = 0; i < commands.size(); i++)
         {
